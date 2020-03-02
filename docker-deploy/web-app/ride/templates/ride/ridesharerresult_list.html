@@ -1,0 +1,68 @@
+{% extends 'ride/base.html' %}
+{% load mathfilters %}
+{% block content %}
+
+<p>
+  Here are all your joined share-rides that are not picked up by a driver.
+</p>
+<p>
+  You can cancel your share-rides by clicking "cancel" anytime before a driver comfirms your ride.
+</p>
+<p>
+  If you would like to edit, please cancel first and start a new searching.
+</p>
+<br>
+
+<table border="1">
+    <!-- tr表示每一行， td表示每一个元素 -->
+    <thead>
+        <tr>
+            <!-- tr表示table row， 指一行 -->
+            <!-- th相当于是列表的头，告知这一列是什么元素 -->
+            <th>Status</th>
+            <th>Cancel</th>
+            <th>Owner</th>
+            <th>Destination</th>
+            <th>Arrival Time</th>
+            <th>Total Passenger Number</th>
+            <th>Owner's Passenger Number</th>
+            <th>Share Or Not</th>
+            <th>Type Requirement</th>
+            <th>Special Requirement</th>
+            <th>Sharer</th>
+            <th>Sharer's numbers</th>
+            <th>Driver</th>
+            <th>Driver's vehicle</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for ride in object_list %}
+        <tr>
+            <!-- td表示每一行里面的元素 -->
+            <td>{{ ride.status }}</td>
+            {% if ride.status == 'pending'%}
+            <td><a href="{% url 'share-cancel' ride.id %}">Cancel</a></td>
+            {% else %}
+            <td>Cannot Cancel Now</td>
+            {% endif %}
+            <td>{{ ride.owner.username }}</td>
+            <td>{{ ride.addr }}</td>
+            <td>{{ ride.arrive_date|date:"m/d/Y P" }}</td>
+            <td>{{ ride.passenger_num }}</td>
+            <td>{{ ride.passenger_num|sub:ride.share_num }}</td>
+            <td>{{ ride.whether_share }}</td>
+            <td>{{ ride.required_type }}</td>
+            <td>{{ ride.required_special }}</td>
+            <td>{{ ride.share_name }}</td>
+            <td>{{ ride.share_num }}</td>
+            <td>{{ ride.driver_name }}</td>
+            <td>{{ ride.driver_license }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock content %}

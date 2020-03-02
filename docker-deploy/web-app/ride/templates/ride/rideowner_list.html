@@ -1,0 +1,83 @@
+{% extends 'ride/base.html' %}
+{% load mathfilters %}
+{% block content %}
+
+<br>
+<p>
+  Here are all your uncompleted rides.
+</p>
+<p>
+  You can cancel the rides by clicking "cancel" and edit the rides by clicking "change".
+</p>
+<p>
+  Once a sharer joins your ride or a driver comfirms your ride, you cannot change or cancel that ride.
+</p>
+<br>
+
+
+<table border="1">
+    <!-- tr表示每一行， td表示每一个元素 -->
+    <thead>
+        <tr>
+            <!-- tr表示table row， 指一行 -->
+            <!-- th相当于是列表的头，告知这一列是什么元素 -->
+            <th>Status</th>
+            <th>Change</th>
+            <th>Cancel</th>
+            <th>Owner</th>
+            <th>Destination</th>
+            <th>Arrival Time</th>
+            <th>Total Passenger Number</th>
+            <th>Our Party's Passenger Number</th>
+            <th>Share Or Not</th>
+            <th>Maximum sharer's number</th>
+            <th>Type Requirement</th>
+            <th>Special Requirement</th>
+            <th>Sharer</th>
+            <th>Sharer's numbers</th>
+            <th>Driver</th>
+            <th>Driver's vehicle</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for ride in object_list %}
+        <tr>
+            <!-- td表示每一行里面的元素 -->
+            <td>{{ ride.status }}</td>
+
+            {% if ride.status == 'open' %}
+            <td><button onclick="window.location.href='{% url 'rideowner-update' ride.id %}'">Change</button></td>
+            {% else %}
+            <td>Cannnot Change now!</td>
+            {% endif %}
+
+
+            {% if ride.status == 'open' %}
+            <td><button onclick="window.location.href='{% url 'rideowner-delete' ride.id %}'">Cancel</button></td>
+            {% else %}
+            <td>Cannnot Cancel now!</td>
+            {% endif %}
+
+
+            <td>{{ ride.owner.username }}</td>
+            <td>{{ ride.addr }}</td>
+            <td>{{ ride.arrive_date|date:"m/d/Y P" }}</td>
+            <td>{{ ride.passenger_num }}</td>
+            <td>{{ ride.passenger_num|sub:ride.share_num }}</td>
+            <td>{{ ride.whether_share }}</td>
+            <td>{{ ride.max_share_num }}</td>
+            <td>{{ ride.required_type }}</td>
+            <td>{{ ride.required_special }}</td>
+            <td>{{ ride.share_name }}</td>
+            <td>{{ ride.share_num }}</td>
+            <td>{{ ride.driver_name }}</td>
+            <td>{{ ride.driver_license }}</td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock content %}

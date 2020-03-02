@@ -1,0 +1,57 @@
+{% extends 'ride/base.html' %}
+{% block content %}
+
+<p>
+  Please do not forget to click the complete button to finish this order!
+</p>
+
+<br><br>
+
+<table border = "1">
+<!-- tr表示每一行， td表示每一个元素 -->
+        <thead>
+                <tr>
+                        <!-- tr表示table row， 指一行 -->
+                        <!-- th相当于是列表的头，告知这一列是什么元素 -->
+                        <th>Status</th>
+                        <th>Complete</th>
+                        <th>Owner</th>
+                        <th>Destination</th>
+                        <th>Arrival Time</th>
+                        <th>Passenger Number</th>
+                        <th>Share Or Not</th>
+                        <th>Type Requirement</th>
+                        <th>Special Requirement</th>
+			<th>Sharer</th>
+			<th>Sharer's numbers</th>
+			<th>Driver</th>
+			<th>Driver's vehicle</th>
+                </tr>
+        </thead>
+
+        <tbody>
+          {% for ride in object_list %}
+                <tr>
+                  <!-- td表示每一行里面的元素 -->
+                  <td>{{ ride.status }}</td>
+
+                  <td><a href="{% url 'driver-complete' ride.id %}">Complete</a></td>
+                  <td>{{ ride.owner.username }}</td>
+                  <td>{{ ride.addr }}</td>
+                  <td>{{ ride.arrive_date|date:"m/d/Y P" }}</td>
+                  <td>{{ ride.passenger_num }}</td>
+                  <td>{{ ride.whether_share }}</td>
+                  <td>{{ ride.required_type }}</td>
+                  <td>{{ ride.required_special }}</td>
+		  <td>{{ ride.share_name }}</td>
+		  <td>{{ ride.share_num }}</td>
+		  <td>{{ ride.driver_name }}</td>
+		  <td>{{ ride.driver_license }}</td>
+
+                </tr>
+          {% endfor %}
+        </tbody>
+
+</table>
+
+{% endblock content %}

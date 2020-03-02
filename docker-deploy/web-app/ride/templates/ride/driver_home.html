@@ -1,0 +1,35 @@
+{% extends 'ride/base.html' %}
+{% block content %}
+<div>
+  <p>
+  Welcome out best and warmest driver!Thanks for you hard working!
+  </p>
+
+  <br>
+  <button onclick="window.location.href='{% url 'driver-list' %}'">Find an Order</button><br><br>
+  <p class=main>
+    Click "Find a Order" to choose a suitable order and begin working.
+  </p>
+  <br>
+
+  <button onclick="window.location.href='{% url 'driverwork-list' %}'">Current Order</button> <br><br>
+  <p class =main>
+    Click "Current Order" to see the order you have picked and are now wokring on.
+  </p>
+  <p class = main>
+    Please click "Confirm" when you finish the order!
+  </p>
+  <br>
+
+  <button onclick="window.location.href='{% url 'driverpast-list' %}'">History</button> <br><br>
+  <p class = main>
+    Click "History" to see all the orders you have finished.
+  </p>
+  <br>
+  
+   <h6>**********ATENTION***********</h6>
+  <h6>If you do not want to be a driver now, please delete your vehicle's license number and change the capacity to 0. Then we will delete your information from our driver database. Of course, we hope you will never have this thought. Also, you can register again anytime you want!</h6>
+
+  
+</div>
+{% endblock content %}

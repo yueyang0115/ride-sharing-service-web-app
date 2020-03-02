@@ -1,0 +1,31 @@
+{% extends 'ride/base.html' %}
+
+{% block content %}
+<div>
+    <p>
+       Welcome out ride-sharer! Thanks for using our platform to find a share-ride!
+    </p>
+
+    <br>
+    <button onclick="window.location.href='{% url 'ridesharer-create' %}'">Search a Journey</button> <br><br>
+    <p class = "main">
+       Click "Search a Journey" to find a suitable ride that has same destination as yours.
+    </p>
+    <p>
+      Suitable rides will be shown after your searching and you can join it. If there's no ride you can join,nothing will be shown.
+    </p>
+    <br>
+
+    <button onclick="window.location.href='{% url 'ridesharerresult-list' %}'">Current Journey</button> <br><br>
+    <p class = "main">
+       Click "Current Journey" to see all your share-rides that are picked up but not complete.
+    </p>
+    <br>
+
+    <button onclick="window.location.href='{% url 'ridesharerpast-list' %}'">History</button> <br><br>
+    <p class = "main">
+       Click "History" to see all your completed share-rides.
+    </p>
+    <br>
+</div>
+{% endblock content %}

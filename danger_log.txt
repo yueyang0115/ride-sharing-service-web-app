@@ -1,0 +1,40 @@
+01/21
+Today we are going to write the part related to register and login/logout. We have already now that it’s very unreasonable to use plain text passwords. Since we have not learned something related to security, we decide to use the template created by Django to deal with this part. We created an app called users, it will store all the information related to user and driver.
+
+
+01/25
+Today we finished the part related to create, update and delete the order related to ride owner. We find a big problem that the user A can even delete the order posted by user B. This is a big problem in out design. Finally, we decide to add a function in the RideOwnerDeleteView class.
+
+************************************************************
+    def test_func(self):
+        ride_owner = self.get_object()
+        if self.request.user == ride_owner.owner:
+            return True
+        return False
+**************************************************************
+This restricts that each user can only delete their own order.
+
+
+01/26
+After resolving the problem above, we find that the create and update is also in risk due to some reasons. A user without login might be able to create an order, and also might update other’s orders. In order to solving that, we 
+
+***********************************************************
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+************************************************************
+
+So, each class now have the prerequisite as below.
+
+******************************************************************
+class RideOwnerCreateView(LoginRequiredMixin, CreateView):
+	……
+class RideOwnerUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+	……
+*******************************************************************
+
+01/27
+When we try to sending emails to our users, we need to store the company’s email and email passwords in the setting.py directly. It is dangerous but at current stage we don’t know how to do that correctly.
+02/02
+We used the built-in function in Django to create the database of our models, but this also generate a problem that it is hard for us to directly handle the data as we want, it is better to use another method next time.
+
+02/04
+For the convenience of the assessment, we put everything into one docker. However, this is not correct completely. It is better to make one docker per privilege-level.

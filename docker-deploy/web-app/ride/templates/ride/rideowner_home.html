@@ -1,0 +1,29 @@
+{% extends 'ride/base.html' %}
+
+{% block content %}
+<div>
+  <p>
+     Welcome out ride-owner! Thanks for using our platform to request a ride!
+  </p>
+
+  <br>
+  <button onclick="window.location.href='{% url 'rideowner-create' %}'">Start a Journey</button><br><br>
+  <p class = "main">
+       Click "Start a Journey" to request a new ride as ride-owner.
+  </p>
+  <br>
+
+  <button onclick="window.location.href='{% url 'rideowner-list' %}'">Current Journey</button> <br><br>
+  <p class = "main">
+    Click "Current Journey" to see all your requested rides that are not complete.
+  </p>
+  <br>
+
+  <button onclick="window.location.href='{% url 'rideownerpast-list' %}'">History</button> <br><br>
+  <p class = "main">
+    Click "History" to see all your completed rides.
+  </p>
+  <br>
+
+</div>
+{% endblock content %}
